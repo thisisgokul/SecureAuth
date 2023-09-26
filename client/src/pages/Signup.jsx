@@ -1,22 +1,32 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+
 const Signup = () => {
-  const navigate=useNavigate();
-  const [formdata,setFormdata]=useState({});
-  const handleChange=(e)=>{
-    setFormdata({...formdata,[e.target.id]:e.target.value})
-    
+  const navigate = useNavigate();
+  const [formdata, setFormdata] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleChange = (e) => {
+    setFormdata({ ...formdata, [e.target.id]: e.target.value });
   }
+
   const handleSubmit = async (e) => {
-    e.preventDefault()
-   try {
-    await axios.post('/api/signup', formdata);
-    navigate('/sign-in');
-   } catch (error) {
-    console.log(error);
-   }
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      await axios.post('/api/signup', formdata);
+      setLoading(false);
+      navigate('/sign-in');
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
   }
+
   return (
     <div className="my-12 max-w-lg mx-auto px-8">
       <h1 className="text-4xl font-bold text-center my-5">Sign Up</h1>
@@ -42,10 +52,15 @@ const Signup = () => {
           className="p-3 rounded-lg bg-slate-100"
           onChange={handleChange}
         />
-        <button className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:bg-opacity-80">
-          signup
+        <button
+          type="submit" 
+          className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:bg-opacity-80"
+          disabled={loading}
+        >
+          {loading ? 'Signing up...' : 'Signup'}
         </button>
       </form>
+      {error && <div className="text-red-500">Error: {error.message}</div>}
       <div className="flex gap-2 mt-3 text-lg">
         <p>Already have an Account?</p>
         <Link to={"/sign-in"} className="text-blue-500">

@@ -3,6 +3,7 @@ const app=express();
 const cors = require('cors');
 const mongooseConnect=require("./config/config")
 const userRouter=require("./routes/authRoutes");
+const cookieparser=require('cookie-parser');
 
 
 //connect to Database
@@ -16,7 +17,7 @@ app.use(cors({
 
 //routes
 app.use('/',userRouter);
-
+app.use(cookieparser())
 
 // app.use((err,req,res,next)=>{
 //     const statusCode=err.statusCode||500

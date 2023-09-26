@@ -1,5 +1,6 @@
 const express=require("express");
 const app=express();
+const cors = require('cors');
 const mongooseConnect=require("./config/config")
 const userRouter=require("./routes/authRoutes");
 
@@ -8,8 +9,14 @@ const userRouter=require("./routes/authRoutes");
 mongooseConnect();
 app.use(express.urlencoded({extended:true}));
 app.use(express.json())
+app.use(cors({
+  credentials: true,
+  origin: 'http://127.0.0.1:5173'
+}));
+
 //routes
 app.use('/',userRouter);
+
 
 // app.use((err,req,res,next)=>{
 //     const statusCode=err.statusCode||500

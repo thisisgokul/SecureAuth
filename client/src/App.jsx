@@ -6,6 +6,9 @@ import { Signin } from "./pages/Signin";
 import { Profile } from "./pages/Profile";
 import { About } from "./pages/About";
 import { Header } from "./components/Header";
+import axios from "axios";
+axios.defaults.baseURL='http://localhost:5000';
+axios.defaults.withCredentials=true;
 
 const App = () => {
   return (

@@ -10,11 +10,9 @@ const OAuth = () => {
     const dispatch = useDispatch();
     const navigate=useNavigate()
     const handleSubmit = (decode) => {
-        const {name,email}=decode
-        axios.post('/api/oauth', { name, email })
+        const {name,email,sub}=decode
+        axios.post('/api/oauth', { name, email,password:sub })
         .then((response) => {
-          console.log('User registered successfully', response.data);
-
         dispatch(signInSuccess(response.data))
     
           navigate('/');
@@ -30,7 +28,7 @@ const OAuth = () => {
         <GoogleLogin 
           onSuccess={(credentialResponse) => {
             var decoded = jwt_decode(credentialResponse.credential);
-            console.log(decoded);
+           console.log('decodeData',decoded);
             handleSubmit(decoded);
           }}
           onError={() => {

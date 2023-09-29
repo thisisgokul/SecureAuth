@@ -48,20 +48,24 @@ const signin = async (req, res, next) => {
 }
 
 const google = async (req, res, next) => {
-  const { name, email } = req.body;
+  const { name, email, password } = req.body;
+
   try {
     const existingUser = await User.findOne({ email });
-
-    if (existingUser) {
-      generateToken(res, existingUser._id);
-      res.json(existingUser);
-    } else {
+    if (!existingUser) {
       const userDoc = await User.create({
         name,
         email,
+        password
       });
+
       generateToken(res, userDoc._id);
-      res.json(userDoc);
+      const { password: hashedPassword, ...rest } = userDoc._doc;
+      res.status(200).json(rest);
+    } else {
+      generateToken(res, existingUser._id);
+
+      res.json(existingUser);
     }
   } catch (error) {
     next(customError(500, 'An error occurred during signup'));

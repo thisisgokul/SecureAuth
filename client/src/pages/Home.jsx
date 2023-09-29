@@ -1,7 +1,20 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 
-export const Home = () => {
+const Home = () => {
+  const handleLogout = async () => {
+    try {
+      await axios.get('/api/logout'); 
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
   return (
-    <div>Home</div>
-  )
-}
+    <button onClick={handleLogout}>
+      Logout
+    </button>
+  );
+};
+
+export default Home;

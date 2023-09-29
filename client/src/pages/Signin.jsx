@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInFail, signInStart, signInSuccess } from "../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import OAuth from "../components/OAuth";
+
 
 export const Signin = () => {
   const navigate = useNavigate();
@@ -63,12 +65,16 @@ export const Signin = () => {
         </button>
       </form>
       {error && <div className="text-red-500">{displayError(error)}</div>}
-      <div className="flex gap-2 mt-3 text-lg">
+      
+      <div className="flex gap-2 mt-3 text-lg justify-center">
         <p>Don't have an Account?</p>
         <Link to={"/sign-up"} className="text-blue-500">
           sign up
         </Link>
+       
       </div>
+      <h4 className="flex justify-center my-4">-----OR----</h4>
+      <OAuth/>
     </div>
   );
 };

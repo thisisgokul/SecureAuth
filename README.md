@@ -1,6 +1,6 @@
 # <span style="font-size: 1.5em;">SECUREAUTH</span>
 
-<span style="font-size: 3em;">Welcome to SecureAuth, your secure authentication web app for managing user accounts, profile details, and authentication methods. This app is built using cutting-edge technologies such as React, Redux, Node.js, and MongoDB to provide you with a seamless and secure authentication experience.</span>
+<span style="font-size: 3em;">Welcome to SecureAuth, your secure authentication web app for managing user accounts, profile details, and authentication methods. This app is built using cutting-edge technologies such as React, Redux, Node.js,express.js,and MongoDB to provide you with a seamless and secure authentication experience.</span>
 
 ## <span style="font-size: 1.2em;">Features</span>
 

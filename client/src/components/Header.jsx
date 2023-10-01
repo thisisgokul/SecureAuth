@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { BiSolidUserDetail } from "react-icons/bi";
 
 export const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -18,12 +19,14 @@ export const Header = () => {
           <Link to={"/about"}>
             <ul className="hover:text-red-500">About</ul>
           </Link>
-          <Link to={"/sign-in"}>
-            <ul className="hover:text-red-500">Sign-In</ul>
-          </Link>
-          {currentUser && (
+
+          {currentUser ? (
             <Link to="/profile">
-              <ul className="hover:text-red-500">Profile</ul>
+              <BiSolidUserDetail className="hover:text-red-500" size={38} />
+            </Link>
+          ) : (
+            <Link to={"/sign-in"}>
+              <ul className="hover:text-red-500">Sign-In</ul>
             </Link>
           )}
         </div>

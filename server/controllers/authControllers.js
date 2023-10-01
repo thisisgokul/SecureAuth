@@ -13,9 +13,7 @@ const getAll = async (req, res) => {
 const signup = async (req, res, next) => {
   const { name, email, password } = req.body;
   try {
-
     const existingUser = await User.findOne({ email });
-
     if (existingUser) {
       return next(customError(404, 'email already exist'))
     }
@@ -49,7 +47,6 @@ const signin = async (req, res, next) => {
 
 const google = async (req, res, next) => {
   const { name, email, password } = req.body;
-
   try {
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
@@ -58,7 +55,6 @@ const google = async (req, res, next) => {
         email,
         password
       });
-
       generateToken(res, userDoc._id);
       const { password: hashedPassword, ...rest } = userDoc._doc;
       res.status(200).json(rest);
@@ -80,16 +76,6 @@ const logout = (req, res) => {
   }
 }
 
-const getUserProfile = async (req, res) => {
-  let token;
 
-  token = req.cookies.token;
-  try {
-    console.log("profileTokenForchromegokul::", token)
 
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-module.exports = { getAll, signup, signin, google, logout, getUserProfile };
+module.exports = { getAll, signup, signin, google, logout };

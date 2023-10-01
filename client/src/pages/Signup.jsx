@@ -10,7 +10,7 @@ const Signup = () => {
 
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.id]: e.target.value });
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,14 +18,14 @@ const Signup = () => {
     setError(null);
 
     try {
-      await axios.post('/api/signup', formdata);
+      await axios.post("/api/signup", formdata);
       setLoading(false);
-      navigate('/sign-in');
+      navigate("/sign-in");
     } catch (error) {
       setError(error);
       setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="my-12 max-w-lg mx-auto px-8">
@@ -53,11 +53,11 @@ const Signup = () => {
           onChange={handleChange}
         />
         <button
-          type="submit" 
+          type="submit"
           className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:bg-opacity-80"
           disabled={loading}
         >
-          {loading ? 'Signing up...' : 'Signup'}
+          {loading ? "Signing up..." : "Signup"}
         </button>
       </form>
       {error && <div className="text-red-500">Error: {error.message}</div>}
